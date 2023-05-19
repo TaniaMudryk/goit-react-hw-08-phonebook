@@ -4,6 +4,7 @@ import {
   deleteContactsThunk,
   fetchContactsThunk,
 } from './operations';
+import { logOut } from 'redux/auth/operations';
 
 const arrThunk = [addContactsThunk, deleteContactsThunk, fetchContactsThunk];
 
@@ -37,6 +38,12 @@ const handleRejected = (state, action) => {
   state.error = action.payload;
 };
 
+const handleFulfilledLogOut = state => {
+  state.items = [];
+  state.error = null;
+  state.isLoading = false;
+};
+
 export const contactsSlice = createSlice({
   name: 'contacts',
   initialState: listContacts,
@@ -45,6 +52,7 @@ export const contactsSlice = createSlice({
       .addCase(fetchContactsThunk.fulfilled, handleFulfilledFetchContacts)
       .addCase(addContactsThunk.fulfilled, handleFulfilledAddContacts)
       .addCase(deleteContactsThunk.fulfilled, handleFulfilledDeleteContacts)
+      .addCase(logOut.fulfilled, handleFulfilledLogOut)
       .addMatcher(isAnyOf(...createThunk('pending')), handlePending)
       .addMatcher(isAnyOf(...createThunk('fulfilled')), handleFulfilled)
       .addMatcher(isAnyOf(...createThunk('rejected')), handleRejected);
