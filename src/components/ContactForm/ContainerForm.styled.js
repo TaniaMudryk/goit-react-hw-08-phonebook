@@ -7,6 +7,7 @@ export const FormContact = styled.form`
     width: 100px;
   }
 `;
+
 export const Box = styled.div`
   display: flex;
   flex-direction: column;
