@@ -30,7 +30,9 @@ const handleFulfilledAddContacts = (state, action) => {
   state.items.push(action.payload);
 };
 const handleFulfilledDeleteContacts = (state, action) => {
-  const index = state.items.findIndex(contact => contact.id === action.payload);
+  const index = state.items.findIndex(
+    contact => contact.id === action.payload.id
+  );
   state.items.splice(index, 1);
 };
 const handleRejected = (state, action) => {
